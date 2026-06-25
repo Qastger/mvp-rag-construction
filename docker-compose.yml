@@ -1,0 +1,15 @@
+services:
+  app:                      # коробка №1 — твой FastAPI
+    build: .                # собрать образ по чертежу в этой папке
+    ports:
+      - "8000:8000"         # пробросить порт наружу, чтобы видеть /health
+    depends_on:
+      - db                  # стартовать ПОСЛЕ базы
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+  db:                       # коробка №2 — Postgres
+    image: postgres:16      # взять готовый образ Postgres (чертёж не пишем сами)
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}   # пароль базы
