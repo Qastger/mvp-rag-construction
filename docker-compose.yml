@@ -13,3 +13,8 @@ services:
     image: postgres:16      # взять готовый образ Postgres (чертёж не пишем сами)
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}   # пароль базы
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  
+volumes:
+  pgdata:
